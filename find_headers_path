@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# echo "start ..."
+
+downdir() {
+    for file in $(ls $1); do
+        if [ -d $1/$file ]; then
+            ls $1/$file/*.h* >/dev/null 2>&1 && echo \"-I\${workspaceFolder}/$1/$file\",
+            downdir $1"/"$file
+        fi
+    done
+}
+downdir $1
+# echo done
